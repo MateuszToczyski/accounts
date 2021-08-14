@@ -1,6 +1,8 @@
 package com.kodilla.accounts.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
 @Entity(name = "accounts")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @Id
@@ -24,24 +28,7 @@ public class Account {
     @Column(name = "available_funds")
     private BigDecimal availableFunds;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @Column(name = "customer_id")
+    private Long customerId;
 
-    public Account() {
-    }
-
-    public Account(String nrb, String currency, BigDecimal availableFunds) {
-        this.nrb = nrb;
-        this.currency = currency;
-        this.availableFunds = availableFunds;
-    }
-
-    public Account(Long id, String nrb, String currency, BigDecimal availableFunds, Customer customer) {
-        this.id = id;
-        this.nrb = nrb;
-        this.currency = currency;
-        this.availableFunds = availableFunds;
-        this.customer = customer;
-    }
 }

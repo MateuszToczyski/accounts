@@ -7,6 +7,7 @@ import com.kodilla.accounts.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,11 @@ public class AccountService {
     public AccountDto findById(Long id) {
         Optional<Account> accountOptional = accountRepository.findById(id);
         return accountOptional.map(accountMapper::toAccountDto).orElse(null);
+    }
+
+    public List<AccountDto> findByCustomerId(Long customerId) {
+        List<Account> accounts = accountRepository.findByCustomerId(customerId);
+        return accountMapper.toAccountDtoList(accounts);
     }
 
     public AccountDto createAccount(AccountDto accountDto) {

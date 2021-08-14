@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
+public class CustomerDto {
     private Long id;
-    private String nrb;
-    private String currency;
-    private BigDecimal availableFunds;
-    private Long customerId;
+    private List<AccountDto> accounts;
 }

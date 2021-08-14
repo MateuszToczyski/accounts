@@ -3,3 +3,5 @@ spring:
     name: accounts
   profiles:
     active: production
+eureka:
+  client: ${eureka-client}

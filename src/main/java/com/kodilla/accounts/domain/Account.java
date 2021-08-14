@@ -24,6 +24,10 @@ public class Account {
     @Column(name = "available_funds")
     private BigDecimal availableFunds;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Account() {
     }
 
@@ -31,5 +35,13 @@ public class Account {
         this.nrb = nrb;
         this.currency = currency;
         this.availableFunds = availableFunds;
+    }
+
+    public Account(Long id, String nrb, String currency, BigDecimal availableFunds, Customer customer) {
+        this.id = id;
+        this.nrb = nrb;
+        this.currency = currency;
+        this.availableFunds = availableFunds;
+        this.customer = customer;
     }
 }

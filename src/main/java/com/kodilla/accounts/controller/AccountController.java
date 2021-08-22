@@ -39,8 +39,8 @@ public class AccountController {
         }
     }
 
-    @GetMapping
-    public GetAccountResponse findAccountByNrb(@RequestParam String nrb) {
+    @GetMapping(params = "nrb")
+    public GetAccountResponse findAccountByNrb(@RequestParam("nrb") String nrb) {
         AccountDto account = accountService.findByNrb(nrb);
         if (account != null) {
             return GetAccountResponse.of(account);
@@ -49,7 +49,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping
+    @GetMapping(params = "customerId")
     public GetAccountsResponse findByCustomerId(@RequestParam("customerId") Long customerId) {
         log.info("Get accounts for customerId: {}", customerId);
         if (!allowGetAccounts) {

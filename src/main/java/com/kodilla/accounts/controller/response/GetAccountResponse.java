@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
-public class GetAccountByIdResponse {
+public class GetAccountResponse {
     private AccountDto account;
 }

@@ -1,7 +1,7 @@
 package com.kodilla.accounts.controller;
 
 import com.kodilla.accounts.controller.response.CreateAccountResponse;
-import com.kodilla.accounts.controller.response.GetAccountByIdResponse;
+import com.kodilla.accounts.controller.response.GetAccountResponse;
 import com.kodilla.accounts.controller.response.GetAccountsResponse;
 import com.kodilla.accounts.dto.AccountDto;
 import com.kodilla.accounts.service.AccountService;
@@ -30,10 +30,20 @@ public class AccountController {
     private boolean allowGetAccounts;
 
     @GetMapping("{id}")
-    public GetAccountByIdResponse getAccountById(@PathVariable Long id) {
+    public GetAccountResponse findAccountById(@PathVariable Long id) {
         AccountDto account = accountService.findById(id);
         if (account != null) {
-            return GetAccountByIdResponse.of(account);
+            return GetAccountResponse.of(account);
+        } else {
+            throw new ResponseStatusException(NOT_FOUND);
+        }
+    }
+
+    @GetMapping
+    public GetAccountResponse findAccountByNrb(@RequestParam String nrb) {
+        AccountDto account = accountService.findByNrb(nrb);
+        if (account != null) {
+            return GetAccountResponse.of(account);
         } else {
             throw new ResponseStatusException(NOT_FOUND);
         }

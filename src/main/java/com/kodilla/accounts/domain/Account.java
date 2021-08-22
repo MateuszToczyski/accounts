@@ -17,7 +17,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nrb")
+    @Column(name = "nrb", unique = true)
     private String nrb;
 
     @Column(name = "currency")

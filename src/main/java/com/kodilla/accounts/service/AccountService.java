@@ -22,6 +22,11 @@ public class AccountService {
         return accountOptional.map(accountMapper::toAccountDto).orElse(null);
     }
 
+    public AccountDto findByNrb(String nrb) {
+        Optional<Account> accountOptional = accountRepository.findByNrb(nrb);
+        return accountOptional.map(accountMapper::toAccountDto).orElse(null);
+    }
+
     public List<AccountDto> findByCustomerId(Long customerId) {
         List<Account> accounts = accountRepository.findByCustomerId(customerId);
         return accountMapper.toAccountDtoList(accounts);

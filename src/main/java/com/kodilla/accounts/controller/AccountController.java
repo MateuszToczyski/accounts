@@ -1,6 +1,7 @@
 package com.kodilla.accounts.controller;
 
 import com.kodilla.accounts.controller.response.CreateAccountResponse;
+import com.kodilla.accounts.controller.response.GetAccountByIdResponse;
 import com.kodilla.accounts.controller.response.GetAccountsResponse;
 import com.kodilla.accounts.dto.AccountDto;
 import com.kodilla.accounts.service.AccountService;
@@ -14,6 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @Slf4j
 @RefreshScope
 @RestController
@@ -25,6 +28,16 @@ public class AccountController {
 
     @Value("${application.allow-get-accounts}")
     private boolean allowGetAccounts;
+
+    @GetMapping("{id}")
+    public GetAccountByIdResponse getAccountById(@PathVariable Long id) {
+        AccountDto account = accountService.findById(id);
+        if (account != null) {
+            return GetAccountByIdResponse.of(account);
+        } else {
+            throw new ResponseStatusException(NOT_FOUND);
+        }
+    }
 
     @GetMapping
     public GetAccountsResponse findByCustomerId(@RequestParam("customerId") Long customerId) {
